@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-printf "Database password: "
-read psqlroot
-
 # Goodbye SELinux
 sudo setenforce 0
 
@@ -28,6 +25,10 @@ sudo -i -u postgres createuser opennms
 
 # make psql database for openmnms
 sudo -i -u postgres createdb -O opennms opennms
+
+# Prompt User for psql database passoword
+read -sp 'Database Password: ' psqlroot
+psqlroot=psqlroot
 
 # Set SQL superuser password
 sudo -i -u postgres psql -c "ALTER USER postgres WITH PASSWORD '${psqlroot}';"
