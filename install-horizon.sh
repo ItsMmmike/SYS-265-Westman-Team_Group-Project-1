@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+printf "Database password: "
+read psqlroot
+
 sudo setenforce 0
 
 sudo yum -y install wget nano epel-release
@@ -21,8 +24,6 @@ sudo -i -u postgres createuser opennms
 
 # make database
 sudo -i -u postgres createdb -O opennms opennms
-
-psqlroot="bruh1234"
 
 # Set SQL superuser password
 sudo -i -u postgres psql -c "ALTER USER postgres WITH PASSWORD '${psqlroot}';"
